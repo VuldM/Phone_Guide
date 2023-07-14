@@ -20,12 +20,14 @@ def open_file():
     original_pb = deepcopy(phone_book)
 
 def save_file():
+    global original_pb
     with open(path, 'w', encoding='UTF-8') as file:
         contacts = []
         for uid, contact in phone_book.items():
             contacts.append(';'.join([str(uid), *contact]))
         contacts = '\n'.join(contacts)
         file.write(contacts)
+    original_pb = deepcopy(phone_book)    
 
 def add_contact(new: list[str]):
     phone_book[next_id()] = new
@@ -40,7 +42,7 @@ def search(word: str) -> dict[int, list[str]]:
 
 def change(uid: int, new: list[str]) -> str:
     contact = phone_book.get(uid)
-    for i in range(3):
+    for i in range(len(contact)):
         if new[i] != '':
             contact[i] = new[i]
     phone_book[uid] = contact

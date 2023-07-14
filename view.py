@@ -22,7 +22,7 @@ def show_contacts(book: dict[int, [list[str]]], msg: str):
     max_count = [0,0,0]
     if book:        
         for contact in book.values():
-            for i in range(3):
+            for i in range(len(contact)):
                 if max_count[i] < len(contact[i]):
                    max_count[i] = len(contact[i]) 
         
